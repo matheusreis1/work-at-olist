@@ -9,5 +9,5 @@ class AuthorAPI(viewsets.ModelViewSet):
     serializer_class = AuthorSerializer
 
 class BookAPI(viewsets.ModelViewSet):
-    queryset = Book.objects.all().order_by('id')\
+    queryset = Book.objects.all().order_by('id')
     serializer_class = BookSerializer
