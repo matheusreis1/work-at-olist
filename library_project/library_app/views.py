@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from .models import Author, Book
 from .serializers import AuthorSerializer, BookSerializer
-from .filters import AuthorFilter
+from .filters import AuthorFilter, BookFilter
 from rest_framework import viewsets
 from rest_framework.filters import SearchFilter, OrderingFilter
 from django_filters import rest_framework as filters
@@ -16,5 +16,5 @@ class AuthorAPI(viewsets.ModelViewSet):
 class BookAPI(viewsets.ModelViewSet):
     queryset = Book.objects.all().order_by('id')
     serializer_class = BookSerializer
-    filter_backends = (SearchFilter, OrderingFilter)
-    search_fields = ['name', 'publication_year', 'edition']
+    filter_backends = (filters.DjangoFilterBackend,)
+    filterset_class = BookFilter

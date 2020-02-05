@@ -9,4 +9,10 @@ class AuthorFilter(filters.FilterSet):
         fields = ['name',]
 
 class BookFilter(filters.FilterSet):
-    pass
+    name = filters.CharFilter(field_name='name', lookup_expr='icontains')
+    edition = filters.NumberFilter(field_name='edition')
+    publication_year = filters.NumberFilter(field_name='publication_year')
+
+    class Meta:
+        model = Book
+        fields = ['name', 'edition', 'publication_year']
