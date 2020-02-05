@@ -12,7 +12,8 @@ class BookFilter(filters.FilterSet):
     name = filters.CharFilter(field_name='name', lookup_expr='icontains')
     edition = filters.NumberFilter(field_name='edition')
     publication_year = filters.NumberFilter(field_name='publication_year')
+    author = filters.ModelMultipleChoiceFilter(field_name='authors__id', to_field_name="id", queryset=Author.objects.all())
 
     class Meta:
         model = Book
-        fields = ['name', 'edition', 'publication_year']
+        fields = ['name', 'edition', 'publication_year', 'author']
