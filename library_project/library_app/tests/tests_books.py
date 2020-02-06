@@ -22,7 +22,7 @@ class BookApiTest(TestCase):
         authors = [Author(name=author['name']) for author in self.authors]
         Author.objects.bulk_create(authors)
 
-        books = [
+        self.books = [
             {
                 "name": "Book 1",
                 "edition": 1,
@@ -49,7 +49,7 @@ class BookApiTest(TestCase):
             },
         ]
 
-        self.setup_books(books)
+        self.setup_books(self.books)
 
     @staticmethod
     def setup_books(books):
@@ -84,16 +84,53 @@ class BookApiTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(count, Book.objects.all().count())
 
-    def test_search_name(self):
-        pass
+    def test_search_exact_name(self):
+        """
+            Test of search book by exact name
+        """
+        name = self.books[0]['name']
+        response = self.client.get(self.url+f"?name={name}")
+        content = json.loads(response.content)
+        count = content['count']
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(count, Book.objects.all().filter(name=name).count())
+
+    def test_search_contains_name(self):
+        """
+            Test of search book by part of name
+        """
+        response = self.client.get(self.url+"?name=Book")
+        content = json.loads(response.content)
+        count = content['count']
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(count, 4)
 
     def test_search_year(self):
-        pass
+        """
+            Test of search book by publication year
+        """
+        publication_year = self.books[0]['publication_year']
+        response = self.client.get(self.url+f"?publication_year={publication_year}")
+        content = json.loads(response.content)
+        count = content['count']
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(count, Book.objects.all().filter(publication_year=publication_year).count())
     
     def test_search_edition(self):
-        pass
+        """
+            Test of search book by edition
+        """
+        edition = self.books[0]['edition']
+        response = self.client.get(self.url+f"?edition={edition}")
+        content = json.loads(response.content)
+        count = content['count']
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(count, Book.objects.all().filter(edition=edition).count())
     
     def test_search_author(self):
+        """
+            Test of search book by author
+        """
         pass
     
     def test_(self):
