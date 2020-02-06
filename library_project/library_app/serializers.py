@@ -11,6 +11,18 @@ class BookSerializer(serializers.ModelSerializer):
         model = Book
         fields = '__all__'
 
+    def __init__(self, *args, **kwargs):
+        super(BookSerializer, self).__init__(*args, **kwargs)
+        request = self.context.get('request', None)
+        if request is not None and request.method == "GET":
+            self.fields['authors'] = serializers.SerializerMethodField()
+    
+    def get_authors(self, obj):
+        """
+            Return authors data with id and name
+        """
+        return AuthorSerializer(obj.authors, many=True).data    
+
     def validate(self, data):
         """
             Validate values of publication year and edition in books api

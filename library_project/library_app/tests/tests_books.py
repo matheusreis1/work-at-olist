@@ -62,7 +62,6 @@ class BookApiTest(TestCase):
                 edition = book['edition'],
                 publication_year= book['publication_year']
             )
-
             book_created.authors.set(book['authors'])
 
     def test_get_books(self):
@@ -71,3 +70,34 @@ class BookApiTest(TestCase):
         """
         response = self.client.get(self.url)
         self.assertEqual(response.status_code, 200)
+
+    # CRUD
+    # Search by name, publication_year, edition, author
+
+    def test_count_get_books(self):
+        """
+            Test of count of books in GET method
+        """
+        response = self.client.get(self.url)
+        content = json.loads(response.content)
+        count = content['count']
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(count, Book.objects.all().count())
+
+    def test_search_name(self):
+        pass
+
+    def test_search_year(self):
+        pass
+    
+    def test_search_edition(self):
+        pass
+    
+    def test_search_author(self):
+        pass
+    
+    def test_(self):
+        pass
+    
+    def test_(self):
+        pass
