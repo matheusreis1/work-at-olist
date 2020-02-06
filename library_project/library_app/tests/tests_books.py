@@ -131,10 +131,14 @@ class BookApiTest(TestCase):
         """
             Test of search book by author
         """
-        pass
+        author = self.authors[0]['name']
+        response = self.client.get(self.url+f"?author={author}")
+        content = json.loads(response.content)
+        count = content['count']
+        self.assertEqual(response.status_code, 200)
     
-    def test_(self):
-        pass
+    # def test_(self):
+    #     pass
     
-    def test_(self):
-        pass
+    # def test_(self):
+    #     pass
