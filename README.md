@@ -50,7 +50,8 @@ python manage.py test
 
 # REST API
 
-The REST API documentation. (
+The REST API documentation.
+A collection in postman is available: https://www.getpostman.com/collections/569cc6fe7ba17e579450
 
 ## Get list of Authors
 
@@ -58,7 +59,7 @@ The REST API documentation. (
 
 `GET /api/author/`
 
-### Response
+### Example Response
 
     Status Code 200
     {
@@ -99,7 +100,7 @@ The REST API documentation. (
 
 `GET /api/author/{id}/`
 
-### Response
+### Example Response
 
     Status Code 200
     {
@@ -129,7 +130,7 @@ The REST API documentation. (
 * Authors: list of ids (integers)
   
 
-### Response
+### Example Response
 
     Status Code 201
     {
@@ -174,7 +175,7 @@ The REST API documentation. (
 * Authors: list of ids (integers)
   
 
-### Response
+### Example Response
 
     Status Code 200
     {
@@ -193,7 +194,7 @@ The REST API documentation. (
 
 `GET /api/book/{id}/`
 
-### Response
+### Example Response
 
     Status Code 200
     {
@@ -219,7 +220,7 @@ The REST API documentation. (
 
 `DELETE /api/book/{id}/`
 
-### Response
+### Example Response
 
     Status Code 204
 
