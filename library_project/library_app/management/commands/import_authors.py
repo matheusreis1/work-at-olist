@@ -19,13 +19,16 @@ class Command(BaseCommand):
             self.stderr.write("Could not open/read file: "+options.get('csv_file'))
             return
 
-        with open(csv_file, newline='') as csvfile:
-            spamreader = csv.reader(csvfile, delimiter=',')
-            headers = next(spamreader)
-            for row in spamreader:
-                name = row[0]
-                Author.objects.create(
-                  name=name
-                )
+        try:
+            with open(csv_file) as csvfile:
+                reader = csv.DictReader(csvfile)
+                for row in reader:
+                    Author.objects.create(
+                        name=row['name']
+                    )
+
+        except Exception as e:
+            self.stderr.write("Error on document format.")
+            return
 
         self.stdout.write('Done')

@@ -13,18 +13,18 @@ class ImportAuthorsTest(TestCase):
             Test to verify name of file
         """
         out = StringIO()
-        err_out = StringIO()
-        management.call_command('import_authors', 'authors_error.csv', stdout=out,stderr=err_out)
+        error_out = StringIO()
+        management.call_command('import_authors', 'authors_error.csv', stdout=out,stderr=error_out)
         self.assertIn('Starting import authors', out.getvalue())
-        self.assertIn('Could not open/read file: authors_error.csv', err_out.getvalue())
+        self.assertIn('Could not open/read file: authors_error.csv', error_out.getvalue())
 
     def test_import_authors_csv_file(self):
         """
             Test import authors from csv file
         """
         out = StringIO()
-        error = StringIO()
-        management.call_command('import_authors', 'authors.csv', stdout=out, stderr=error)
+        error_out = StringIO()
+        management.call_command('import_authors', 'authors.csv', stdout=out, stderr=error_out)
         authors = Author.objects.all()
 
         with open('authors.csv') as csvfile:
@@ -34,3 +34,12 @@ class ImportAuthorsTest(TestCase):
 
         self.assertIn('Done', out.getvalue())
         self.assertEqual(authors.count(), len(lines))
+
+    def test_error_import_authors_csv_file(self):
+        """
+            Test import authors from csv file
+        """
+        out = StringIO()
+        error_out = StringIO()
+        management.call_command('import_authors', 'library_app/tests/fixtures/authors_error.csv', stdout=out, stderr=error_out)
+        self.assertIn('Error on document format.', error_out.getvalue())
