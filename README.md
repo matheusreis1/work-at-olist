@@ -107,7 +107,7 @@ The REST API documentation. (
       "name": "Luciano Ramalho"
     }
 
-## Post a Book
+## Create a Book
 
 ### Request
 
@@ -123,15 +123,15 @@ The REST API documentation. (
          5
       ]
     }
-* Name: string, max_length = 100
-* Edition: integer
-* Publication Year: integer
+* Name: required, string, max_length = 100
+* Edition: required, integer
+* Publication Year: required, integer
 * Authors: list of ids (integers)
   
 
 ### Response
 
-    Status Code 200
+    Status Code 201
     {
        "count": 1,
        "next": null,
@@ -151,6 +151,78 @@ The REST API documentation. (
            }
        ]
     }
+   
+## Update a Book
+
+### Request
+
+`PUT /api/book/{id}/`
+
+### Parameters
+
+    {
+      "name": "Python Cookbook",
+      "edition": 2,
+      "publication_year": 2021,
+      "authors": [
+         1, 2
+      ]
+    }
+* Name: required, string, max_length = 100
+* Edition: required, integer
+* Publication Year: required, integer
+* Authors: list of ids (integers)
+  
+
+### Response
+
+    Status Code 200
+    {
+        "id": 1,
+        "name": "Python Cookbook",
+        "edition": 2,
+        "publication_year": 2021,
+        "authors": [
+            1, 2
+        ]
+    }
+    
+## Get one Book
+
+### Request
+
+`GET /api/book/{id}/`
+
+### Response
+
+    Status Code 200
+    {
+        "id": 1,
+        "name": "Python Cookbook",
+        "edition": 2,
+        "publication_year": 2021,
+        "authors": [
+            {
+                "id": 1,
+                "name": "Luciano Ramalho"
+            },
+            {
+                "id": 2,
+                "name": "Osvaldo Santana Neto"
+            }
+        ]
+    }
+    
+## Delete a Book
+
+### Request
+
+`DELETE /api/book/{id}/`
+
+### Response
+
+    Status Code 204
+
 
 ## Development Enviroment
 Built this project using:
