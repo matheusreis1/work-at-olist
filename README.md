@@ -1,3 +1,51 @@
+# Library API
+
+## How to use
+* Clone this repository
+* Enter the repository folder
+```
+cd work-at-olist/
+```
+* Create a virtual env
+```
+python -m venv library_venv
+```
+* And activate it
+```
+source library_venv/Scripts/activate
+```
+* Then install requirements
+```
+pip install -r requirements.txt
+```
+* Enter the project folder
+```
+cd library_project/
+```
+* Migrate the database
+```
+python manage.py migrate
+```
+
+## Import authors
+* To import authors you can use the actors.csv file available in the project
+```
+python manage.py import_authors authors.csv
+```
+* Or use your own, the CSV file need to have the following format:
+```
+name
+Luciano Ramalho
+Osvaldo Santana Neto
+David Beazley
+```
+
+## Testing
+* Tests can be executed by running
+```
+python manage.py test
+```
+
 # Work at Olist
 
 [Olist](https://olist.com/) is a company that offers an integration platform for sellers and marketplaces allowing them to sell their products across multiple channels.
