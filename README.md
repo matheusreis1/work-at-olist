@@ -1,6 +1,6 @@
 # Library API
 
-Running at https://reis-library.herokuapp.com/
+Application running at https://reis-library.herokuapp.com/
 
 ## How to use
 * Clone this repository
