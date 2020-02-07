@@ -48,6 +48,110 @@ David Beazley
 python manage.py test
 ```
 
+# REST API
+
+The REST API documentation. (
+
+## Get list of Authors
+
+### Request
+
+`GET /api/author/`
+
+### Response
+
+    Status Code 200
+    {
+       "count": 6,
+       "next": null,
+       "previous": null,
+       "results": [
+           {
+               "id": 5,
+               "name": "Brian K. Jones"
+           },
+           {
+               "id": 4,
+               "name": "Chetan Giridhar"
+           },
+           {
+               "id": 3,
+               "name": "David Beazley"
+           },
+           {
+               "id": 6,
+               "name": "J.K Rowling"
+           },
+           {
+               "id": 1,
+               "name": "Luciano Ramalho"
+           },
+           {
+               "id": 2,
+               "name": "Osvaldo Santana Neto"
+           }
+       ]
+    }
+    
+## Get one Author
+
+### Request
+
+`GET /api/author/{id}/`
+
+### Response
+
+    Status Code 200
+    {
+      "id": 1,
+      "name": "Luciano Ramalho"
+    }
+
+## Post a Book
+
+### Request
+
+`POST /api/book/`
+
+### Parameters
+
+    {
+      "name": "Python Cookbook",
+      "edition": 1,
+      "publication_year": 2020,
+      "authors": [
+         5
+      ]
+    }
+* Name: string, max_length = 100
+* Edition: integer
+* Publication Year: integer
+* Authors: list of ids (integers)
+  
+
+### Response
+
+    Status Code 200
+    {
+       "count": 1,
+       "next": null,
+       "previous": null,
+       "results": [
+           {
+               "id": 1,
+               "name": "Python Cookbook",
+               "edition": 1,
+               "publication_year": 2020,
+               "authors": [
+                   {
+                       "id": 5,
+                       "name": "Brian K. Jones"
+                   }
+               ]
+           }
+       ]
+    }
+
 ## Development Enviroment
 Built this project using:
 * Python 3.7
