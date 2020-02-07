@@ -46,6 +46,12 @@ David Beazley
 python manage.py test
 ```
 
+## Development Enviroment
+Built this project using:
+* Python 3.7
+* Windows 10
+* Git Bash, to execute commands
+
 # Work at Olist
 
 [Olist](https://olist.com/) is a company that offers an integration platform for sellers and marketplaces allowing them to sell their products across multiple channels.
